@@ -5,10 +5,11 @@
 node.name: "${NODE_NAME}"
 cluster.name: "${CLUSTER_NAME}"
 network.host: 0.0.0.0
-cluster.initial_master_nodes: ["${NODE_NAME01}", "${NODE_NAME02}", "${NODE_NAME03}"]
+cluster.initial_master_nodes: ["${NODE_NAME01}"]
+discovery.zen.ping.unicast.hosts: ["${NODE_NAME01}", "${NODE_NAME02}", "${NODE_NAME03}"]
 ## X-Pack settings
 ## see https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
 #
-xpack.license.self_generated.type: trial
-xpack.security.enabled: true
-xpack.monitoring.collection.enabled: true
+#xpack.license.self_generated.type: trial
+#xpack.security.enabled: false
+#xpack.monitoring.collection.enabled: true
