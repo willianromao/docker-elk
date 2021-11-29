@@ -9,7 +9,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch:/usr/share/elasticsearch/data:z
+      - elasticsearch1:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -35,7 +35,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch:/usr/share/elasticsearch/data:z
+      - elasticsearch2:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -61,7 +61,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch:/usr/share/elasticsearch/data:z
+      - elasticsearch3:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -99,4 +99,6 @@ networks:
     driver: bridge
 
 volumes:
-  elasticsearch:
+ elasticsearch1:
+ elasticsearch2:
+ elasticsearch3:
