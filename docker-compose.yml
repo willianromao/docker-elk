@@ -90,7 +90,9 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - elasticsearch1
+      - elasticsearch2
+      - elasticsearch3
 
 networks:
   elk:
