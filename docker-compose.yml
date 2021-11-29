@@ -1,7 +1,8 @@
 version: '3.2'
 
 services:
-  elasticsearch:
+  elasticsearch1:
+    container_name: "elasticsearch1"
     build:
       context: elasticsearch/
       args:
@@ -13,34 +14,70 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
+      NODE_NAME: "elasticsearch1"
+      CLUSTER_NAME: "elasticsearch_cluster"
+      NODE_NAME01: "elasticsearch1"
+      NODE_NAME02: "elasticsearch2"
+      NODE_NAME03: "elasticsearch3"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-      discovery.type: single-node
+      # discovery.type: single-node
     networks:
       - elk
 
-  logstash:
+  elasticsearch2:
+    container_name: "elasticsearch2"
     build:
-      context: logstash/
+      context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,z
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,z
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - elasticsearch:/usr/share/elasticsearch/data:z
     ports:
-      - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
-      - "9600:9600"
+      - "9200:9200"
+      - "9300:9300"
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      NODE_NAME: "elasticsearch2"
+      CLUSTER_NAME: "elasticsearch_cluster"
+      NODE_NAME01: "elasticsearch1"
+      NODE_NAME02: "elasticsearch2"
+      NODE_NAME03: "elasticsearch3"
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      # discovery.type: single-node
     networks:
       - elk
-    depends_on:
-      - elasticsearch
 
+  elasticsearch3:
+    container_name: "elasticsearch3"
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - elasticsearch:/usr/share/elasticsearch/data:z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      NODE_NAME: "elasticsearch3"
+      CLUSTER_NAME: "elasticsearch_cluster"
+      NODE_NAME01: "elasticsearch1"
+      NODE_NAME02: "elasticsearch2"
+      NODE_NAME03: "elasticsearch3"
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      # discovery.type: single-node
+    networks:
+      - elk
   kibana:
     build:
       context: kibana/
