@@ -37,8 +37,8 @@ services:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
       - elasticsearch2:/usr/share/elasticsearch/data:z
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9202:9200"
+      - "9302:9300"
     environment:
       NODE_NAME: "elasticsearch2"
       CLUSTER_NAME: "elasticsearch_cluster"
@@ -63,8 +63,8 @@ services:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
       - elasticsearch3:/usr/share/elasticsearch/data:z
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9203:9200"
+      - "9303:9300"
     environment:
       NODE_NAME: "elasticsearch3"
       CLUSTER_NAME: "elasticsearch_cluster"
