@@ -12,9 +12,9 @@ services:
     environment:
       NODE_NAME: "elasticsearch1"
       CLUSTER_NAME: "elasticsearch_cluster"
-      NODE_NAME01: "elasticsearch1"
-      NODE_NAME02: "elasticsearch2"
-      NODE_NAME03: "elasticsearch3"
+      NODE_NAME01: "elasticsearch0"
+      NODE_NAME02: "elasticsearch1"
+      NODE_NAME03: "elasticsearch2"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
     networks:
@@ -31,28 +31,28 @@ services:
     environment:
       NODE_NAME: "elasticsearch2"
       CLUSTER_NAME: "elasticsearch_cluster"
-      NODE_NAME01: "elasticsearch1"
-      NODE_NAME02: "elasticsearch2"
-      NODE_NAME03: "elasticsearch3"
+      NODE_NAME01: "elasticsearch0"
+      NODE_NAME02: "elasticsearch1"
+      NODE_NAME03: "elasticsearch2"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
     networks:
       - "rabbitmq-prometheus"
-  elasticsearch3:
-    container_name: "elasticsearch3"
+  elasticsearch0:
+    container_name: "elasticsearch0"
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch3:/usr/share/elasticsearch/data:z
+      - elasticsearch0:/usr/share/elasticsearch/data:z
     #ports:
     #  - "9203:9200"
     #  - "9303:9300"
     environment:
-      NODE_NAME: "elasticsearch3"
+      NODE_NAME: "elasticsearch0"
       CLUSTER_NAME: "elasticsearch_cluster"
-      NODE_NAME01: "elasticsearch1"
-      NODE_NAME02: "elasticsearch2"
-      NODE_NAME03: "elasticsearch3"
+      NODE_NAME01: "elasticsearch0"
+      NODE_NAME02: "elasticsearch1"
+      NODE_NAME03: "elasticsearch2"
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: changeme
     networks:
@@ -68,14 +68,16 @@ services:
     networks:
       - "rabbitmq-prometheus"
     depends_on:
+      - elasticsearch0
       - elasticsearch1
       - elasticsearch2
-      - elasticsearch3
+
 
 networks:
   "rabbitmq-prometheus":
 
 volumes:
+ elasticsearch0:
  elasticsearch1:
  elasticsearch2:
- elasticsearch3:
+
