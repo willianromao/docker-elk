@@ -65,6 +65,10 @@ services:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,z
     ports:
       - "5601:5601"
+    environment:
+      NODE_NAME01: "elasticsearch0"
+      NODE_NAME02: "elasticsearch1"
+      NODE_NAME03: "elasticsearch2"
     networks:
       - "rabbitmq-prometheus"
     depends_on:
