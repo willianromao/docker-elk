@@ -69,6 +69,7 @@ services:
       NODE_NAME01: "elasticsearch0"
       NODE_NAME02: "elasticsearch1"
       NODE_NAME03: "elasticsearch2"
+      ELASTICSEARCH_HOSTS: '[ "http://elasticsearch0:9200", "http://elasticsearch1:9200", "http://elasticsearch2:9200" ]'
     networks:
       - "rabbitmq-prometheus"
     depends_on:
