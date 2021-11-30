@@ -66,7 +66,7 @@ services:
     ports:
       - "5601:5601"
     environment:
-      - ELASTICSEARCH_HOSTS=["http://elasticsearch0:9200","http://elasticsearch1:9200","http://elasticsearch2:9200"]
+      ELASTICSEARCH_CLUSTER: '["http://elasticsearch0:9200","http://elasticsearch1:9200","http://elasticsearch2:9200"]'
     networks:
       - "rabbitmq-prometheus"
     depends_on:
