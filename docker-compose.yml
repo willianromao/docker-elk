@@ -65,8 +65,6 @@ services:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,z
     ports:
       - "5601:5601"
-    environment:
-      ELASTICSEARCH_CLUSTER: '["http://elasticsearch0:9200","http://elasticsearch1:9200","http://elasticsearch2:9200"]'
     networks:
       - "rabbitmq-prometheus"
     depends_on:
